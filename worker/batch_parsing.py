@@ -31,7 +31,7 @@ def generate_filename(org_name):
 
 @celery_app.task()
 def parseUnzippedResumes(path):
-    path = os.path.join('flask-app', path)
+    path = os.path.join('/','flask-app', path)
     logger.info('Got Request - Starting work ')
     #raise ValueError('test')
     capture_message("Starting the Batch Parsing of {0}".format(path))

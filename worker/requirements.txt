@@ -19,6 +19,7 @@ docx2txt==0.8
 ebcdic==1.1.1
 EbookLib==0.17.1
 extract-msg==0.28.7
+flower
 idna==3.2
 IMAPClient==2.1.0
 Jinja2==3.0.1

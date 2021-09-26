@@ -12,6 +12,7 @@ services:
 
   celery_worker:
     build: './worker'
+    user: nobody
     depends_on:
       - redis
     volumes:
