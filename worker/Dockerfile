@@ -1,4 +1,4 @@
-FROM python:3.8-alpine
+FROM python:3.8-slim-buster
 
 ENV CELERY_BROKER_URL redis://redis:6379/0
 ENV CELERY_RESULT_BACKEND redis://redis:6379/0
@@ -8,6 +8,7 @@ COPY . /worker
 WORKDIR /worker
 
 # install requirements
+#RUN pip install --upgrade pip setuptools wheel
 RUN pip install -r requirements.txt
 RUN python -m spacy download en_core_web_md
 

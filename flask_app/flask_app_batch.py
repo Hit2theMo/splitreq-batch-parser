@@ -36,7 +36,7 @@ batch_logger = logging.getLogger("batch_parsing")
 
 app = Flask(__name__)
 # app.logger.addHandler(flask_file_handler)
-redis_obj = Redis(host='localhost', port='6379')
+redis_obj = Redis(host='redis', port='6379')
 celery_app = Celery('batch_parsing', broker=CELERY_BROKER_URL, backend=CELERY_RESULT_BACKEND)
 
 username_err_msg = {
@@ -90,9 +90,10 @@ def generate_filename(batch, org_name=None):
 
 def unzipFile(base_unzip_path, uploaded_zip_path, zip_name):
     unzip_path = pathlib.PurePath(base_unzip_path, zip_name)
+    print(unzip_path)
     # Create Folder for Files to be unzipped
     pathlib.Path(unzip_path).mkdir(parents=False, exist_ok=False)
-
+    
     with zipfile.ZipFile(uploaded_zip_path, "r") as zip_ref:
         zip_ref.extractall(unzip_path)
     return unzip_path

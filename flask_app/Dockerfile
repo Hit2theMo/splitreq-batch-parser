@@ -6,7 +6,7 @@ ENV API_KEY ab8a7ff7-6659-4a44-b7d9-064612d825fa
 ENV SENTRY_DSN https://51db7ee73f9d431dba99fe94a659e5c0@o611000.ingest.sentry.io/5748041
 ENV HOST 0.0.0.0
 ENV PORT 5000
-ENV DEBUG false
+ENV DEBUG False
 
 # copy source code
 COPY . /flask-app
