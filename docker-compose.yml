@@ -40,7 +40,7 @@ services:
     #container_name: nginx
     #restart: always
     ports:
-      - "80:80"
+      - "81:81"
     depends_on:
       - flask_app
 
