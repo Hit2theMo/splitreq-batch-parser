@@ -4,11 +4,12 @@ services:
     build: './flask_app'
     restart: always
     ports:
-      - "5000:5000"
-    depends_on:
-      - redis
+      - "8000:8000"
     volumes:
       - file-uploads:/flask-app/batch_parsing
+    command: gunicorn -w 9 -b 0.0.0.0:8000 wsgi:app
+    depends_on:
+      - redis
 
   celery_worker:
     build: './worker'
@@ -34,7 +35,15 @@ services:
     ports:
       - '6379:6379'
 
-
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - flask_app
+      
 volumes:
   file-uploads:
  
