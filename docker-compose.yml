@@ -2,18 +2,18 @@ version: "3.7"
 services:
   flask_app:
     build: './flask_app'
-    restart: always
+    #restart: always
     ports:
       - "8000:8000"
     volumes:
       - file-uploads:/flask-app/batch_parsing
-    command: gunicorn -w 9 -b 0.0.0.0:8000 wsgi:app
+    command: /usr/local/bin/gunicorn -w 9 -b 0.0.0.0:8000 wsgi:app
     depends_on:
       - redis
 
   celery_worker:
     build: './worker'
-    user: nobody
+    #user: nobody
     depends_on:
       - redis
     volumes:
@@ -37,13 +37,15 @@ services:
 
   nginx:
     build: ./nginx
-    container_name: nginx
-    restart: always
+    #container_name: nginx
+    #restart: always
     ports:
       - "80:80"
     depends_on:
       - flask_app
-      
+
+
+
 volumes:
   file-uploads:
  

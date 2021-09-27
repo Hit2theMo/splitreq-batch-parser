@@ -19,8 +19,8 @@ RUN pip install -r requirements.txt
 EXPOSE 5000
 
 # run the app server
-ENTRYPOINT ["python"]
-CMD ["wsgi.py"]
+# ENTRYPOINT ["python"]
+# CMD ["wsgi.py"]
 
 #CMD gunicorn --workers $WORKERS \
 #  --threads $THREADS \

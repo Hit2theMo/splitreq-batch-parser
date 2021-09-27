@@ -26,8 +26,11 @@ sentry_logging = LoggingIntegration(
 
 capture_message("Starting the flask app")
 
-app.run(debug=environ.get('DEBUG',False),
-            port=int(environ.get('PORT',5000)),
-            host=environ.get('HOST','0.0.0.0')
-    )
-#app.run(debug=False)
+if __name__ == '__main__':
+    capture_message("Starting the flask app")
+
+    # app.run(debug=environ.get('DEBUG',False),
+    #             port=int(environ.get('PORT',5000)),
+    #             host=environ.get('HOST','0.0.0.0')
+    #     )
+    app.run(debug=False)
