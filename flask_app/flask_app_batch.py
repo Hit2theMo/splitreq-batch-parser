@@ -206,6 +206,7 @@ def batchResumeParsing():
         "Taskid": r.id,
         "Message": "Task has been submitted and will start soon",
     }
+    capture_message(f"New Task with ID- {r.id} has been submitted and will start soon")
     return jsonify(task_id_result)
 
 
@@ -214,6 +215,7 @@ def get_status(task_id):
     try:
         celery_res = celery_app.AsyncResult(task_id, app=celery_app)
         result = celery_res.result
+        capture_message(f"Status of Task Id- {task_id} is {celery_res.state}")
         redis_keys = [f'zip_path_{task_id}', f'unzip_path_{task_id}']
         zip_file_path = redis_obj.get(redis_keys[0])
         unzip_path = redis_obj.get(redis_keys[1])
