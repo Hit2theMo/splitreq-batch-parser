@@ -5,6 +5,7 @@ RUN apt-get update && apt-get install -y antiword
 
 ENV CELERY_BROKER_URL redis://redis:6379/0
 ENV CELERY_RESULT_BACKEND redis://redis:6379/0
+ENV SENTRY_DSN https://c298bec09c074c459ff7706dc46f5e17@o611000.ingest.sentry.io/5983692
 
 # copy source code
 COPY . /worker
@@ -15,4 +16,4 @@ WORKDIR /worker
 RUN pip install -r requirements.txt
 RUN python -m spacy download en_core_web_md
 
-ENTRYPOINT celery -A batch_parsing worker --loglevel=info
+ENTRYPOINT celery -A batch_parsing worker --loglevel=warning
