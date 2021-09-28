@@ -24,7 +24,6 @@ sentry_logging = LoggingIntegration(
     event_level=logging.INFO,  # Send Info as events
 )
 
-capture_message("Starting the flask app")
 
 if __name__ == '__main__':
     capture_message("Starting the flask app")
