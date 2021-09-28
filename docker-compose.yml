@@ -2,7 +2,7 @@ version: "3.7"
 services:
   flask_app:
     build: './flask_app'
-    #restart: always
+    restart: always
     ports:
       - "5000:5000"
     volumes:
@@ -18,7 +18,7 @@ services:
       - redis
     volumes:
       - file-uploads:/flask-app/batch_parsing
-    
+    restart: always
 
   celery_monitor:
     build: './worker'
@@ -29,21 +29,25 @@ services:
     depends_on:
       - redis
     #volumes: ['./celery-queue:/queue']
+    restart: always
 
   redis:
     image: 'redis'
     ports:
       - '6379:6379'
+    #command: redis-server --requirepass newpwinstancesplitreq
+    restart: always
 
   nginx:
     build: ./nginx
     #container_name: nginx
-    #restart: always
+    restart: always
     ports:
       - "81:81"
     depends_on:
       - flask_app
-
+    #volumes:
+     # - ./project.conf:/etc/nginx/conf.d/project.conf
 
 
 volumes:

@@ -223,7 +223,7 @@ def get_status(task_id):
             deleteZipUnzipFiles(zip_file_path, unzip_path)
             redis_obj.delete(*redis_keys)
             # add logic to delete files after X amount after task completion (if needed)
-            celery_res.forget()
+            #celery_res.forget()
             return jsonify(result)
 
         elif str(celery_res.state) == 'PENDING':
@@ -236,7 +236,7 @@ def get_status(task_id):
             }
             deleteZipUnzipFiles(zip_file_path, unzip_path)
             redis_obj.delete(*redis_keys)
-            celery_res.forget()
+            #celery_res.forget()
             return jsonify(task_status_failed)
 
         else:
