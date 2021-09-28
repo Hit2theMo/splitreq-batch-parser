@@ -7,11 +7,15 @@ import pathlib
 import time
 from zipfile import ZipFile
 
+import sentry_sdk
 import shortuuid
 from celery import Celery
 from sentry_sdk import capture_message
 
 from resume_parser import extractDataPoints
+
+SENTRY_DSN = os.environ.get('SENTRY_DSN')
+sentry_sdk.init(SENTRY_DSN,traces_sample_rate=1.0)
 
 CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL', 'redis://localhost:6379'),
 CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND', 'redis://localhost:6379')
