@@ -37,6 +37,10 @@ services:
       - '6379:6379'
     command: redis-server /usr/local/etc/redis/redis.conf
     restart: always
+    links:
+    - flask_app
+    - celery_worker
+    - celery_monitor
 
   nginx:
     build: ./nginx
