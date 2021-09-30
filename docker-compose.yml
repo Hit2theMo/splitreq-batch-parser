@@ -25,7 +25,7 @@ services:
     ports:
      - "5555:5555"
     entrypoint: celery 
-    command: -A batch_parsing --broker=redis://redis:6379/0 flower --port=5555
+    command: -A batch_parsing --broker=redis://redis:6379/0 flower --port=5555 --address=0.0.0.0
     depends_on:
       - redis
     #volumes: ['./celery-queue:/queue']
