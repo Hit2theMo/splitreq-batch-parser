@@ -33,7 +33,7 @@ def generate_filename(org_name):
     return file_name
 
 
-@celery_app.task()
+@celery_app.task(soft_time_limit=18000)
 def parseUnzippedResumes(path):
     path = os.path.join('/','flask-app', path)
     logger.info('Got Request - Starting work ')
