@@ -47,10 +47,11 @@ def parseUnzippedResumes(path):
     for fn in file_names:
         try:
             org_file_name, file_extn = os.path.splitext(fn)
+            file_extn = file_extn.replace('.', '')
             #org_file_name, file_extn = fn.split(".")
             org_file_name = org_file_name.strip()
             org_file_path = pathlib.PurePath(path, fn)
-            new_file_name = generate_filename(org_file_name).strip() + file_extn
+            new_file_name = generate_filename(org_file_name).strip() + "." + file_extn
             new_file_path = pathlib.PurePath(path, new_file_name)
             # file_rename_dict[fn] = new_file_name
             # Rename file to the new name
