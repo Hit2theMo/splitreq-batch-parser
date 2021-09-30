@@ -3,8 +3,8 @@ FROM python:3.8-buster
 #RUN apt-get -y install antiword 
 RUN apt-get update && apt-get install -y antiword
 
-ENV CELERY_BROKER_URL redis://redis:6379/0
-ENV CELERY_RESULT_BACKEND redis://redis:6379/0
+ENV CELERY_BROKER_URL redis://127.0.0.1:6379
+ENV CELERY_RESULT_BACKEND redis://127.0.0.1:6379
 ENV SENTRY_DSN https://c298bec09c074c459ff7706dc46f5e17@o611000.ingest.sentry.io/5983692
 
 # copy source code
