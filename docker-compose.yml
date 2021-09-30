@@ -3,15 +3,11 @@ services:
   flask_app:
     build: './flask_app'
     restart: always
-    ports:
-      - "5000:5000"
     volumes:
       - file-uploads:/flask-app/batch_parsing
-    command: /usr/local/bin/gunicorn -w 9 -b 127.0.0.1:5000 wsgi:app
+    command: /usr/local/bin/gunicorn -w 9 -b 0.0.0.0:5000 wsgi:app
     depends_on:
       - redis
-    networks:
-       - backend
 
   celery_worker:
     build: './worker'
@@ -21,8 +17,6 @@ services:
     volumes:
       - file-uploads:/flask-app/batch_parsing
     restart: always
-    networks:
-       - backend
 
   celery_monitor:
     build: './worker'
@@ -34,17 +28,11 @@ services:
       - redis
     #volumes: ['./celery-queue:/queue']
     restart: always
-    networks:
-       - backend
 
   redis:
     build: './redis'
-    ports:
-      - '6379:6379'
     command: redis-server /usr/local/etc/redis/redis.conf
     restart: always
-    networks:
-       - backend
 
   nginx:
     build: ./nginx
@@ -54,8 +42,6 @@ services:
       - "81:81"
     depends_on:
       - flask_app
-    networks:
-       - backend
     #volumes:
      # - ./project.conf:/etc/nginx/conf.d/project.conf
 
@@ -63,5 +49,3 @@ services:
 volumes:
   file-uploads:
  
-networks:
-  backend:
