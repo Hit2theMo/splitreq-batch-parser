@@ -75,6 +75,7 @@ unparsable_resume = {
 }
 
 task_status_pending = {
+    "Status": "PENDING",
     "Message": "Status of the task is Pending, please wait and check again later",
 }
 
@@ -233,6 +234,7 @@ def get_status(task_id):
 
         elif str(celery_res.state) == 'FAILURE':
             task_status_failed = {
+                "Status": "FAILURE",
                 "Error": str(result),  # str(celery_res.traceback)
                 "Message": "Status of the task is Failed, please check the error and try again",
             }
@@ -243,6 +245,7 @@ def get_status(task_id):
 
         else:
             task_status_failed = {
+                "Status": "UNKNOWN",
                 "Message": f"Something went wrong, status of the task is {celery_res.state}, please try again",
             }
     except Exception:
