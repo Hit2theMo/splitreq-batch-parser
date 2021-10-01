@@ -69,29 +69,30 @@ def parseUnzippedResumes(path):
                 f"Error in batch parser while parsing resume- {fn}- {e}"
             )
             if new_file_path:
-                unparsed_resumes.append(str(new_file_path))
+                unparsed_resumes.append(str(fn))
+                # unparsed_resumes.append(str(new_file_path))
             continue
 
-    zip_path = pathlib.PurePath(path, "unparsed_resumes.zip")
-    # Zipping unparsed resumes
-    base64str = ""
-    if unparsed_resumes:
-        with ZipFile(zip_path, "w") as zip:
-            for fn in unparsed_resumes:
-                zip.write(fn)
-        # Converting above Zip into Base64
-        try:
-            with open(zip_path, "rb") as f:
-                base64str = base64.b64encode(f.read()).decode("UTF-8")
-        except Exception:
-            logger.critical(
-                "Error converting unparsed resume Zip file to Base64 string", exc_info=True
-            )
-            base64str = ""
+    # zip_path = pathlib.PurePath(path, "unparsed_resumes.zip")
+    # # Zipping unparsed resumes
+    # base64str = ""
+    # if unparsed_resumes:
+    #     with ZipFile(zip_path, "w") as zip:
+    #         for fn in unparsed_resumes:
+    #             zip.write(fn)
+    #     # Converting above Zip into Base64
+    #     try:
+    #         with open(zip_path, "rb") as f:
+    #             base64str = base64.b64encode(f.read()).decode("UTF-8")
+    #     except Exception:
+    #         logger.critical(
+    #             "Error converting unparsed resume Zip file to Base64 string", exc_info=True
+    #         )
+    #         base64str = ""
 
     final_batch_output["output"] = batch_output
     final_batch_output["unparsed_resumes"] = unparsed_resumes
-    final_batch_output["unparsed_resume_zip_as_base64"] = base64str
+    # final_batch_output["unparsed_resume_zip_as_base64"] = base64str
     json_object = json.dumps(final_batch_output, indent=4)
     capture_message(
         "Finished processing batch file- {0}, JSON Result-{1}".format(path, json_object)
