@@ -19,6 +19,7 @@ sentry_sdk.init(SENTRY_DSN,traces_sample_rate=1.0)
 
 CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL', 'redis://localhost:6379'),
 CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND', 'redis://localhost:6379')
+CELERY_TASK_TIMEOUT = int(os.environ.get('CELERY_TASK_TIMEOUT',18000))
 
 # logging.config.fileConfig('logging.conf')
 logger = logging.getLogger(__name__)
@@ -33,7 +34,7 @@ def generate_filename(org_name):
     return file_name
 
 
-@celery_app.task(soft_time_limit=18000)
+@celery_app.task(soft_time_limit=CELERY_TASK_TIMEOUT)
 def parseUnzippedResumes(path):
     path = os.path.join('/','flask-app', path)
     logger.info('Got Request - Starting work ')

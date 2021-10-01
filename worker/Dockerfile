@@ -6,7 +6,8 @@ RUN apt-get update && apt-get install -y antiword
 ENV CELERY_BROKER_URL redis://redis:6379/0
 ENV CELERY_RESULT_BACKEND redis://redis:6379/0
 ENV SENTRY_DSN https://c298bec09c074c459ff7706dc46f5e17@o611000.ingest.sentry.io/5983692
-
+# Specify Celery worker timeout in Seconds
+ENV CELERY_TASK_TIMEOUT 18000  
 # copy source code
 COPY . /worker
 WORKDIR /worker

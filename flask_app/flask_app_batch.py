@@ -23,7 +23,7 @@ BATCH_UNZIP_PATH = "batch_parsing"
 API_KEY = os.environ.get('API_KEY', "ab8a7ff7-6659-4a44-b7d9-064612d825fa")
 CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL', 'redis://localhost:6379'),
 CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND', 'redis://localhost:6379')
-DEBUG_FLAG = os.environ.get('DEBUG',True)
+DEBUG_FLAG = os.environ.get('DEBUG',False)
 PORT = int(os.environ.get('PORT',5000))
 HOST = os.environ.get('HOST','0.0.0.0')
 
