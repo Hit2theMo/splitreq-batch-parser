@@ -167,6 +167,9 @@ def batchResumeParsing():
         return jsonify(invalid_token_err)
     if status != "success":
         return status
+    #------------------------------------------------------------------------------------------------
+    
+
     # ------------------------------------------------------------------------------------------------
     try:
         payload = request.get_json(force=True)
